@@ -12,7 +12,7 @@ app = FastAPI()
 
 models.Base.metadata.create_all(bind=engine)
 
-# app.include_router(course.router)
+app.include_router(course.router)
 # app.include_router(enrollment.router)
 # app.include_router(lesson.router)
 # app.include_router(question.router)
