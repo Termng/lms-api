@@ -26,7 +26,7 @@ def get_one_student(id: int, db: Session = Depends(get_db)):
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schema.PostResponse)
-def create_student(studProfile: schema.createStudent, db: Session = Depends(get_db)):
+def create_student(studProfile: schema.CreateStudent, db: Session = Depends(get_db)):
     createStudent = models.Students(**studProfile.model_dump())
     db.add(createStudent)
     db.commit()
@@ -36,8 +36,8 @@ def create_student(studProfile: schema.createStudent, db: Session = Depends(get_
     
 
 
-@router.put("/{id}", response_model=schema.updateStudent)
-def update_student(updateStud : schema.updateStudent, id: int, db: Session = Depends(get_db)):
+@router.put("/{id}", response_model=schema.UpdateStudent)
+def update_student(updateStud : schema.UpdateStudent, id: int, db: Session = Depends(get_db)):
     res_data = db.query(models.Students).filter(models.Students.id == id)
     updated_data = res_data.first()
     
@@ -51,7 +51,7 @@ def update_student(updateStud : schema.updateStudent, id: int, db: Session = Dep
 
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def update_student(id, db: Session = Depends(get_db)):
+def update_student(id: int, db: Session = Depends(get_db)):
     res_data = db.query(models.Students).filter(models.Students.id == id)
     to_delete = res_data.first()
     
